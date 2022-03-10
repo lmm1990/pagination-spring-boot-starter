@@ -1,0 +1,3 @@
+rootProject.name = 'pagination-spring-boot-starter'
+include 'pagination-spring-boot-starter'
+include 'demo'
