@@ -1,5 +1,7 @@
 package show.lmm.pagination;
 
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.BeansException;
@@ -22,9 +24,8 @@ import java.lang.reflect.ParameterizedType;
 public class PaginationPluginBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof MybatisProperties) {
-            MybatisProperties mybatisProperties = (MybatisProperties) bean;
-            mybatisProperties.getConfiguration().setObjectFactory(new PageObjectFactory());
+        if (bean instanceof DefaultSqlSessionFactory sessionFactory) {
+            sessionFactory.getConfiguration().setObjectFactory(new PageObjectFactory());
             return bean;
         }
         if (bean instanceof MapperFactoryBean) {

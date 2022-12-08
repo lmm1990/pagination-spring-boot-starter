@@ -9,7 +9,6 @@ import show.lmm.pagination.demo.mapper.TestMapper;
 import show.lmm.pagination.entity.Page;
 import show.lmm.pagination.util.PaginationHelper;
 
-import javax.annotation.Resource;
 
 /**
  * 启动类
@@ -20,8 +19,11 @@ import javax.annotation.Resource;
 @Component
 public class Runner implements CommandLineRunner {
 
-    @Resource
     private TestMapper testMapper;
+
+    public Runner(TestMapper testMapper){
+        this.testMapper = testMapper;
+    }
 
     @Override
     public void run(String... args) {
